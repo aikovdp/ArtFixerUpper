@@ -28,8 +28,10 @@ public class ArtFixerUpper {
             return;
         }
         PlayerFix playerFix = new PlayerFix(itemFix);
-        playerFix.fixPlayerDataDir(worldDir);
+        // playerFix.fixPlayerDataDir(worldDir);
 
         // TODO: Implement chunk fixing
+        RegionFix regionFix = new RegionFix(itemFix);
+        regionFix.fixRegionDir(worldDir);
     }
 }

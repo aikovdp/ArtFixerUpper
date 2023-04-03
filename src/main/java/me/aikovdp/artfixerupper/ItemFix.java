@@ -22,7 +22,7 @@ public class ItemFix {
     }
 
     public Optional<ListBinaryTag> fixItemList(ListBinaryTag itemList) {
-        if (itemList.elementType() != BinaryTagTypes.COMPOUND) {
+        if (itemList.elementType() != BinaryTagTypes.COMPOUND && itemList.size() != 0) {
             throw new IllegalArgumentException("Item list elements must be compound tags.");
         }
         AtomicBoolean dirty = new AtomicBoolean(false);
@@ -40,7 +40,7 @@ public class ItemFix {
         return dirty.get() ? Optional.of(ListBinaryTag.from(list)) : Optional.empty();
     }
 
-    private Optional<CompoundBinaryTag> fixItem(CompoundBinaryTag item) {
+    public Optional<CompoundBinaryTag> fixItem(CompoundBinaryTag item) {
         if (item.getString("id").equals("minecraft:filled_map")) {
             return fixFilledMapItem(item);
         }
