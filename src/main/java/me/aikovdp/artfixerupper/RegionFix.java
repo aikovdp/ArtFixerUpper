@@ -63,6 +63,9 @@ public class RegionFix {
                 }
             }
         }
+        if (dirty) {
+            LOGGER.info("Wrote to " + regionFileFile);
+        }
         return dirty;
     }
 
