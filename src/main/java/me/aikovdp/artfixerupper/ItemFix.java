@@ -8,17 +8,17 @@ import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ItemFix {
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemFix.class);
     private final Map<String, Integer> titleMap;
 
-    public ItemFix(Path titleMapPath) throws IOException {
-        titleMap = readArtCSV(titleMapPath);
+    public ItemFix(Map<String, Integer> titleMap) {
+        this.titleMap = titleMap;
     }
 
     public Optional<ListBinaryTag> fixItemList(ListBinaryTag itemList) {
@@ -78,13 +78,5 @@ public class ItemFix {
         return Optional.of(item.put("tag", tag));
     }
 
-    private static Map<String, Integer> readArtCSV(Path path) throws IOException {
-        Map<String, Integer> map = new HashMap<>();
-        Scanner scanner = new Scanner(path);
-        scanner.useDelimiter("[,\n]");
-        while (scanner.hasNextLine()) {
-            map.put(scanner.next(), scanner.nextInt());
-        }
-        return Collections.unmodifiableMap(map);
-    }
+
 }
