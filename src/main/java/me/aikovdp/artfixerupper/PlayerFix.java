@@ -19,9 +19,14 @@ public class PlayerFix {
     }
 
     public void fixPlayerDataDir(Path worldDir) {
+        Path playerDataDir = worldDir.resolve("playerdata");
+        if (Files.notExists(playerDataDir)) {
+            LOGGER.info("No playerdata directory found, skipping...");
+            return;
+        }
         try (
                 DirectoryStream<Path> stream = Files.newDirectoryStream(
-                        worldDir.resolve("playerdata"),
+                        playerDataDir,
                         path -> path.getFileName().toString() // Filename must follow playerdata naming scheme
                                 .matches("[\\da-f]{8}-[\\da-f]{4}-[\\da-f]{4}-[\\da-f]{4}-[\\da-f]{12}\\.dat")
                 )

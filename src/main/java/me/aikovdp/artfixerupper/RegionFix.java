@@ -29,7 +29,12 @@ public class RegionFix {
     }
 
     public void fixRegionDir(Path worldDir) {
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(worldDir.resolve("region"))) {
+        Path regionDir = worldDir.resolve("region");
+        if (Files.notExists(regionDir)) {
+            LOGGER.info("No region directory found, skipping...");
+            return;
+        }
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(regionDir)) {
             int totalCounter = 0;
             int repairCounter = 0;
             int failCounter = 0;
