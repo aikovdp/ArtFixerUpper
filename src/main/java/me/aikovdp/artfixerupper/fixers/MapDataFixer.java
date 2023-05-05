@@ -1,4 +1,4 @@
-package me.aikovdp.artfixerupper;
+package me.aikovdp.artfixerupper.fixers;
 
 import net.kyori.adventure.nbt.BinaryTagIO;
 import net.kyori.adventure.nbt.CompoundBinaryTag;

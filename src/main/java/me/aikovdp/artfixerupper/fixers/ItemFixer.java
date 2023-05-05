@@ -1,4 +1,4 @@
-package me.aikovdp.artfixerupper;
+package me.aikovdp.artfixerupper.fixers;
 
 import net.kyori.adventure.nbt.BinaryTagTypes;
 import net.kyori.adventure.nbt.CompoundBinaryTag;
@@ -13,11 +13,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ItemFix {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ItemFix.class);
+public class ItemFixer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemFixer.class);
     private final Map<String, Integer> titleMap;
 
-    public ItemFix(Map<String, Integer> titleMap) {
+    public ItemFixer(Map<String, Integer> titleMap) {
         this.titleMap = titleMap;
     }
 

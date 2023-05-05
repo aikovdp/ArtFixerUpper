@@ -1,4 +1,4 @@
-package me.aikovdp.artfixerupper;
+package me.aikovdp.artfixerupper.fixers;
 
 import net.kyori.adventure.nbt.*;
 import org.slf4j.Logger;
@@ -10,12 +10,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
-public class PlayerFix {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PlayerFix.class);
-    private final ItemFix itemFix;
+public class PlayerFixer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlayerFixer.class);
+    private final ItemFixer itemFixer;
 
-    public PlayerFix(ItemFix itemFix) {
-        this.itemFix = itemFix;
+    public PlayerFixer(ItemFixer itemFixer) {
+        this.itemFixer = itemFixer;
     }
 
     public void fixPlayerDataDir(Path worldDir) {
@@ -58,12 +58,12 @@ public class PlayerFix {
             return false; // Never opened on 1.16.5, so data never got borked
         }
         boolean dirty = false;
-        Optional<ListBinaryTag> inventory = itemFix.fixItemList(player.getList("Inventory", BinaryTagTypes.COMPOUND));
+        Optional<ListBinaryTag> inventory = itemFixer.fixItemList(player.getList("Inventory", BinaryTagTypes.COMPOUND));
         if (inventory.isPresent()) {
             player = player.put("Inventory", inventory.get());
             dirty = true;
         }
-        Optional<ListBinaryTag> enderItems = itemFix.fixItemList(player.getList("EnderItems", BinaryTagTypes.COMPOUND));
+        Optional<ListBinaryTag> enderItems = itemFixer.fixItemList(player.getList("EnderItems", BinaryTagTypes.COMPOUND));
         if (enderItems.isPresent()) {
             player = player.put("EnderItems", enderItems.get());
             dirty = true;

@@ -1,5 +1,9 @@
 package me.aikovdp.artfixerupper;
 
+import me.aikovdp.artfixerupper.fixers.ItemFixer;
+import me.aikovdp.artfixerupper.fixers.MapDataFixer;
+import me.aikovdp.artfixerupper.fixers.PlayerFixer;
+import me.aikovdp.artfixerupper.fixers.RegionFixer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,13 +39,13 @@ public class ArtFixerUpper {
         MapDataFixer mapDataFixer = new MapDataFixer(titleMap);
         mapDataFixer.fixDataDir(worldDir);
 
-        ItemFix itemFix = new ItemFix(titleMap);
+        ItemFixer itemFixer = new ItemFixer(titleMap);
 
-        PlayerFix playerFix = new PlayerFix(itemFix);
-        playerFix.fixPlayerDataDir(worldDir);
+        PlayerFixer playerFixer = new PlayerFixer(itemFixer);
+        playerFixer.fixPlayerDataDir(worldDir);
 
-        RegionFix regionFix = new RegionFix(itemFix);
-        regionFix.fixRegionDir(worldDir);
+        RegionFixer regionFixer = new RegionFixer(itemFixer);
+        regionFixer.fixRegionDir(worldDir);
     }
 
     private static Map<String, Integer> readArtCSV(Path path) throws IOException {

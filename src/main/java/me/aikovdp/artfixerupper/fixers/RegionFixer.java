@@ -1,4 +1,4 @@
-package me.aikovdp.artfixerupper;
+package me.aikovdp.artfixerupper.fixers;
 
 import net.kyori.adventure.nbt.BinaryTagIO;
 import net.kyori.adventure.nbt.BinaryTagTypes;
@@ -20,12 +20,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class RegionFix {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RegionFix.class);
-    private final ItemFix itemFix;
+public class RegionFixer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegionFixer.class);
+    private final ItemFixer itemFixer;
 
-    public RegionFix(ItemFix itemFix) {
-        this.itemFix = itemFix;
+    public RegionFixer(ItemFixer itemFixer) {
+        this.itemFixer = itemFixer;
     }
 
     public void fixRegionDir(Path worldDir) {
@@ -101,7 +101,7 @@ public class RegionFix {
                 .map(CompoundBinaryTag.class::cast)
                 .map(tileEntity -> {
                     ListBinaryTag originalItems = tileEntity.getList("Items", BinaryTagTypes.COMPOUND);
-                    Optional<ListBinaryTag> fixedItems = itemFix.fixItemList(originalItems);
+                    Optional<ListBinaryTag> fixedItems = itemFixer.fixItemList(originalItems);
                     if (fixedItems.isPresent()) {
                         tileEntitiesDirty.set(true);
                         return tileEntity.put("Items", fixedItems.get());
@@ -118,7 +118,7 @@ public class RegionFix {
                 .map(CompoundBinaryTag.class::cast)
                 .map(entity -> {
                     CompoundBinaryTag originalItem = entity.getCompound("Item");
-                    Optional<CompoundBinaryTag> fixedItem = itemFix.fixItem(originalItem);
+                    Optional<CompoundBinaryTag> fixedItem = itemFixer.fixItem(originalItem);
                     if (fixedItem.isPresent()) {
                         entitiesDirty.set(true);
                         return entity.put("Item", fixedItem.get());
