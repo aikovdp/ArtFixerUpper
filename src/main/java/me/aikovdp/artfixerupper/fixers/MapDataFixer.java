@@ -12,10 +12,13 @@ import java.util.Map;
 import java.util.UUID;
 
 public class MapDataFixer {
+    // ↓ Configure these ↓
+    private static final String ARTMAP_DIMENSION = "minecraft:minigames";
     public static final long UUID_LEAST = -8082271879484814746L;
     public static final long UUID_MOST = 8674450473152037831L;
+    // ↑ Configure these ↑
+
     public static final UUID UUID = new UUID(UUID_MOST, UUID_LEAST);
-    private static final String ARTMAP_DIMENSION = "minecraft:minigames";
     private static final Logger LOGGER = LoggerFactory.getLogger(MapDataFixer.class);
     private final BinaryTagIO.Reader reader = BinaryTagIO.reader();
     private final BinaryTagIO.Writer writer = BinaryTagIO.writer();
